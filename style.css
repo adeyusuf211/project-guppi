@@ -1,0 +1,182 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  text-decoration: none;
+  list-style: none;
+  font-family: "Poppins", sans-serif;
+  color: rgb(58, 58, 58);
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+.container {
+  display: flex;
+}
+
+.sidebar {
+  width: 20%;
+  height: 100%;
+  background: rgb(255, 131, 131);
+  position: fixed;
+  padding-left: 1rem;
+}
+
+.sidebar.side {
+  width: 5%;
+  transition: 0.5s ease-in;
+}
+
+.sidebar.side .sidebar-link ul li.active {
+  width: 100%;
+}
+
+.sidebar.side .sidebar-link ul li a {
+  display: none;
+}
+
+.sidebar-brand {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+}
+
+.sidebar-brand h1 {
+  color: white;
+}
+
+.sidebar-link ul li {
+  padding: 12px 0 12px 1rem;
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-right: 10px;
+}
+
+.sidebar-link ul li.active {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  background: white;
+  border-radius: 30px 0 0 30px;
+}
+
+.sidebar-link ul li a {
+  margin-left: 10px;
+}
+
+.main {
+  width: 80%;
+  height: 100%;
+  background: rgb(247, 247, 247);
+  position: relative;
+  margin-left: 20%;
+}
+
+nav {
+  display: flex;
+  height: 100px;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  background: white;
+}
+
+nav svg {
+  cursor: pointer;
+}
+
+.nav-input {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-input svg {
+  margin-left: 10px;
+}
+
+.nav-input input {
+  padding: 10px;
+  outline: none;
+  border: 1px solid rgb(187, 187, 187);
+}
+
+.main-content {
+  padding-left: 10px;
+  padding-right: 20px;
+  padding-top: 1rem;
+}
+
+.content-navigator {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.card {
+  padding: 1rem;
+  background: white;
+  width: 32%;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: 0.5s ease-in;
+}
+
+.card:hover {
+  box-shadow: 0 0 10px rgba(224, 224, 224, 0.6);
+}
+
+.totals {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.totals svg {
+  height: 50px;
+  width: 50%;
+}
+
+.content {
+  padding: 20px;
+  background: white;
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.content-cards {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-left: 10px;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card p {
+  margin-bottom: 25px;
+  font-size-adjust: 14px;
+}
+
+.card-key {
+  display: flex;
+  align-items: center;
+}
+
+.card-key svg {
+  margin-right: 10px;
+}
