@@ -134,6 +134,10 @@ nav svg {
   box-shadow: 0 0 10px rgba(224, 224, 224, 0.6);
 }
 
+.card.active {
+  box-shadow: 0 0 10px rgba(224, 224, 224, 0.6);
+}
+
 .totals {
   display: flex;
   align-items: center;
