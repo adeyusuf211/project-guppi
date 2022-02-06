@@ -144,8 +144,7 @@ navigators.forEach(navigator => {
 
 const buttons = document.querySelectorAll('.sidebar-link ul li');
 buttons.forEach(button => {
-    button.addEventListener('click', function(e) {
-        e.preventDefault();
+    button.addEventListener('click', function() {
         fetch('https://api.publicapis.org/entries')
             .then(response => response.json())
             .then(data => {
