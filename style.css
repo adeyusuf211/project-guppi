@@ -63,7 +63,12 @@
   display: flex;
 }
 
-.sidebar .sidebar-brand span {
+.sidebar .sidebar-brand .brand-side {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sidebar .sidebar-brand .brand-side span {
   display: none;
 }
 
@@ -229,7 +234,6 @@ nav svg {
   .sidebar.side {
     width: 100%;
     z-index: 10;
-    position: absolute;
     transition: 0.5s;
   }
 
@@ -241,9 +245,17 @@ nav svg {
     display: none;
   }
 
-  .sidebar.side .sidebar-brand span {
+  .sidebar.side .sidebar-brand .brand-side {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+  }
+
+  .sidebar.side .sidebar-brand .brand-side span {
     margin-left: auto;
     font-size: 1.5rem;
+    display: flex;
   }
 
   .sidebar.side .sidebar-link ul li a {
