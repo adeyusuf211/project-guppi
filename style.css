@@ -20,13 +20,13 @@
 .sidebar {
   width: 20%;
   height: 100%;
-  background: rgb(255, 131, 131);
+  background: rgb(255, 255, 255);
   position: fixed;
   padding-left: 1rem;
 }
 
-.sidebar.side {
-  width: 5%;
+.sidebar.side + .main {
+  margin-left: 80px;
   transition: 0.5s ease-in;
 }
 
@@ -42,11 +42,29 @@
   height: 100px;
   display: flex;
   align-items: center;
-  padding-left: 1rem;
+  padding: 1rem;
+}
+
+.sidebar-brand h5 {
+  display: none;
+  font-size: 2rem;
+  text-align: left;
 }
 
 .sidebar-brand h1 {
-  color: white;
+  color: rgb(32, 32, 32);
+}
+
+.sidebar.side .sidebar-brand h1 {
+  display: none;
+}
+
+.sidebar.side .sidebar-brand h5 {
+  display: flex;
+}
+
+.sidebar .sidebar-brand span {
+  display: none;
 }
 
 .sidebar-link ul li {
@@ -56,13 +74,14 @@
   display: flex;
   align-items: center;
   padding-right: 10px;
+  cursor: pointer;
 }
 
 .sidebar-link ul li.active {
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
-  background: white;
+  background: rgb(255, 207, 207);
   border-radius: 30px 0 0 30px;
 }
 
@@ -71,9 +90,9 @@
 }
 
 .main {
-  width: 80%;
+  width: 100%;
   height: 100%;
-  background: rgb(247, 247, 247);
+  background: rgb(245, 245, 245);
   position: relative;
   margin-left: 20%;
 }
@@ -121,13 +140,19 @@ nav svg {
   padding-right: 10px;
 }
 
-.card {
+.content-navigator .card {
   padding: 1rem;
+}
+
+.card {
   background: white;
   width: 32%;
   margin: 10px 0;
-  cursor: pointer;
   transition: 0.5s ease-in;
+}
+
+.card-body {
+  padding: 1rem;
 }
 
 .card:hover {
@@ -169,11 +194,26 @@ nav svg {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 10px 1rem 20px 1rem;
+}
+
+.card-footer a {
+  padding: 5px 15px;
+  background: rgb(255, 111, 111);
+  border-radius: 50px;
+  color: white;
+  box-shadow: 0 0 10px rgb(255, 136, 136);
+  transition: 0.5s ease-in;
+}
+
+.card-footer a:hover {
+  box-shadow: 0 0 0 rgb(255, 136, 136);
 }
 
 .card p {
-  margin-bottom: 25px;
-  font-size-adjust: 14px;
+  margin-bottom: 1rem;
+  font-size: 14px;
+  margin-top: 10px;
 }
 
 .card-key {
@@ -183,4 +223,56 @@ nav svg {
 
 .card-key svg {
   margin-right: 10px;
+}
+
+@media (max-width: 700px) {
+  .sidebar.side {
+    width: 100%;
+    z-index: 10;
+    position: absolute;
+    transition: 0.5s;
+  }
+
+  .sidebar.side .sidebar-brand h1 {
+    display: flex;
+  }
+
+  .sidebar.side .sidebar-brand h5 {
+    display: none;
+  }
+
+  .sidebar.side .sidebar-brand span {
+    margin-left: auto;
+    font-size: 1.5rem;
+  }
+
+  .sidebar.side .sidebar-link ul li a {
+    display: flex;
+  }
+
+  .main {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .content h1 {
+    font-size: 1.2rem;
+  }
+
+  .content-cards .card {
+    width: 100%;
+  }
+
+  .content-navigator {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .content-navigator .card {
+    width: 100%;
+  }
+
+  .content-navigator .card svg {
+    width: 30px;
+  }
 }
