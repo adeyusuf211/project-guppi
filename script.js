@@ -1,12 +1,11 @@
 fetch('https://api.publicapis.org/entries')
     .then(response => response.json())
     .then(data => {
-        document.querySelector('.content p > strong').innerHTML = data.entries.length;
-
         // untuk menampilkan semua data
         let card        = ``;
         const cards     = document.querySelector('.content-cards');
-        data.entries.forEach(d  => {
+        const entries   = data.entries;
+        entries.forEach(d  => {
             card  += `
                     <div class="card">
                         <div class="card-body">
@@ -24,6 +23,8 @@ fetch('https://api.publicapis.org/entries')
                     `;
                 });
         cards.innerHTML = card;
+
+        document.querySelector('.content p > strong').innerHTML = data.entries.length;
     });
 
     // // Untuk menampilkan jumlah data api yang tidak membutuhkan autentikasi
