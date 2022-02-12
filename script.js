@@ -2,8 +2,8 @@ let xhr = new XMLHttpRequest();
 
 xhr.onreadystatechange = function() {
     if(xhr.readyState == 4 && xhr.status == 200) {
-        let data = JSON.parse(this.responseText);
-        const entries = data.entries;
+        let data        = JSON.parse(this.responseText);
+        const entries   = data.entries;
         allData(entries);
     }
 }
@@ -59,8 +59,8 @@ buttons.forEach(button => {
         const id = this.id;
         xhr.onreadystatechange = function() {
             if(xhr.readyState == 4 && xhr.status == 200) {
-                let data = JSON.parse(this.responseText);
-                const entries = data.entries.filter(result => result.Category.toLowerCase() == id);
+                let data        = JSON.parse(this.responseText);
+                const entries   = data.entries.filter(result => result.Category.toLowerCase() == id);
                 sidebar(entries);
             }
         }
@@ -128,7 +128,7 @@ function cards(result) {
                     <div class="card-footer">
                         <div class="card-key">
                             <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><g><rect fill="none" height="24" width="24"/></g><g><path d="M21,10h-8.35C11.83,7.67,9.61,6,7,6c-3.31,0-6,2.69-6,6s2.69,6,6,6c2.61,0,4.83-1.67,5.65-4H13l2,2l2-2l2,2l4-4.04L21,10z M7,15c-1.65,0-3-1.35-3-3c0-1.65,1.35-3,3-3s3,1.35,3,3C10,13.65,8.65,15,7,15z"/></g></svg>
-                            <span>${result.Auth === "" ? "no" : result.Auth}</span>
+                            <span>${result.Auth === "" ? "No Auth" : result.Auth}</span>
                         </div>
                         <a href="${result.Link}" target="_blank">Visit Site</a>
                     </div>
@@ -148,12 +148,11 @@ sidebars.forEach(sidebar => {
 
 const toggle = document.getElementById('toggle');
 toggle.addEventListener('click', () => {
-    const sidebar = document.querySelector('.sidebar');
-    const sidebarBrandSpan = document.querySelector('.sidebar .sidebar-brand span');
+    const sidebar           = document.querySelector('.sidebar');
+    const sidebarBrandSpan  = document.querySelector('.sidebar .sidebar-brand span');
 
     sidebar.classList.toggle('side');
     sidebarBrandSpan.addEventListener('click', () => {
         sidebar.classList.remove('side');
     });
-    
 });
