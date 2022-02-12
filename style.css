@@ -138,8 +138,9 @@ nav svg {
 }
 
 .content-navigator {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 10px;
   padding-top: 10px;
   padding-left: 10px;
   padding-right: 10px;
@@ -151,8 +152,6 @@ nav svg {
 
 .card {
   background: white;
-  width: 32%;
-  margin: 10px 0;
   transition: 0.5s ease-in;
 }
 
@@ -161,11 +160,7 @@ nav svg {
 }
 
 .card:hover {
-  box-shadow: 0 0 10px rgba(224, 224, 224, 0.6);
-}
-
-.card.active {
-  box-shadow: 0 0 10px rgba(224, 224, 224, 0.6);
+  box-shadow: 0 0 5px rgba(224, 224, 224, 0.6);
 }
 
 .totals {
@@ -189,10 +184,10 @@ nav svg {
 }
 
 .content-cards {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  padding-left: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 10px;
+  padding: 0 10px;
 }
 
 .card-footer {
@@ -273,6 +268,11 @@ nav svg {
 
   .content h1 {
     font-size: 1.2rem;
+  }
+
+  .content-cards {
+    padding-right: 0;
+    padding-left: 10px;
   }
 
   .content-cards .card {

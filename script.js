@@ -24,6 +24,64 @@ function allData(data) {
     OAuth(data);
 }
 
+// Untuk menampilkan data api yang dicari berdasarkan nama dari api.
+const search = document.getElementById('search');
+
+search.addEventListener('input', async function() {
+   xhr.onreadystatechange = function() {
+    if(xhr.readyState == 4 && xhr.status == 200) {
+        let data        = JSON.parse(this.responseText);
+        const keyword   = search.value;
+        const result    = data.entries.filter(d => d.API.toLowerCase() === keyword.toLowerCase());
+        searchData(result);
+    }
+}
+
+xhr.open('GET', 'https://api.publicapis.org/entries', true);
+xhr.send();
+});
+
+function searchData(data) {
+    let card         = ``;
+    const result     = data;
+    result.forEach(d  => card += cards(d));
+    document.querySelector('.content-cards').innerHTML = card;
+
+    document.querySelector('.content p > strong').innerHTML = result.length;
+    no(data);
+    apiKey(data);
+    OAuth(data);
+}
+
+const buttons = document.querySelectorAll('.sidebar-link ul li');
+buttons.forEach(button => {
+    button.addEventListener('click', function() {
+        const id = this.id;
+        xhr.onreadystatechange = function() {
+            if(xhr.readyState == 4 && xhr.status == 200) {
+                let data = JSON.parse(this.responseText);
+                const entries = data.entries.filter(result => result.Category.toLowerCase() == id);
+                sidebar(entries);
+            }
+        }
+        xhr.open('GET', 'https://api.publicapis.org/entries', true);
+        xhr.send();
+    });
+});
+
+
+function sidebar(data) {
+    let card            = '';
+    const categories    = data;
+    categories.forEach(category => card += cards(category));
+    document.querySelector('.content-cards').innerHTML      = card;
+    document.querySelector('.content p > strong').innerHTML = data.length;
+
+    no(data);
+    apiKey(data);
+    OAuth(data);
+}
+
 function no(data) {
     // Untuk menampilkan jumlah data api yang tidak membutuhkan autentikasi
     let totalNo     = ``;
@@ -60,81 +118,6 @@ function OAuth(data) {
     oauths.innerHTML = totalOAuth;
 }
 
-// Untuk menampilkan data api yang dicari berdasarkan nama dari api.
-const search = document.getElementById('search');
-
-search.addEventListener('input', async function() {
-    await searchData(search.value);
-});
-
-function searchData(keyword) {
-    // const small  = document.querySelector('.nav-input small');
-    // const span   = document.querySelector('.nav-input small > span');
-
-    // small.style.display = 'none';
-
-    fetch('https://api.publicapis.org/entries')
-        .then(response => response.json())
-        .then(data => {
-            let card        = ``;
-            const result    = data.entries.filter(d => d.API.toLowerCase() === keyword.toLowerCase());
-            result.forEach(d  => card += cards(d));
-            document.querySelector('.content-cards').innerHTML = card;
-            
-            // if(keyword.length > 0) {
-            //     small.style.display = 'block';
-            //     span.innerHTML = keyword;
-            // }
-
-            document.querySelector('.content p > strong').innerHTML = result.length;
-        });
-}
-
-// Untuk menampilkan data - data api sesuai dengan autentikasi yang di pilih user
-const navigator = document.querySelectorAll('.content-navigator .card');
-navigator.forEach(nav => {
-    nav.addEventListener('click', async function() {
-        await select(this);
-    });
-});
-
-function select(button) {
-    fetch('https://api.publicapis.org/entries')
-            .then(response => response.json())
-            .then(data => {
-                const auth      = data.entries.filter(d => d.Auth === button.id);
-                let card        = ``;
-                auth.forEach(a => card += cards(a));
-                document.querySelector('.content-cards').innerHTML = card;
-                document.querySelector('.content p > strong').innerHTML = auth.length;
-            });
-}
-
-const buttons = document.querySelectorAll('.sidebar-link ul li');
-buttons.forEach(button => {
-    button.addEventListener('click', function() {
-        const id = this.id;
-        xhr.onreadystatechange = function() {
-            if(xhr.readyState == 4 && xhr.status == 200) {
-                let data = JSON.parse(this.responseText);
-                const entries = data.entries.filter(result => result.Category.toLowerCase() == id);
-                sidebar(entries);
-            }
-        }
-        xhr.open('GET', 'https://api.publicapis.org/entries', true);
-        xhr.send();
-    });
-});
-
-
-function sidebar(data) {
-    let card            = '';
-    const categories    = data;
-    categories.forEach(category => card += cards(category));
-    document.querySelector('.content-cards').innerHTML      = card;
-    document.querySelector('.content p > strong').innerHTML = data.length;
-}
-
 function cards(result) {
     return `
                 <div class="card">
@@ -152,16 +135,6 @@ function cards(result) {
                 </div>
             `;
 }
-
-const navigators = document.querySelectorAll('.content-navigator .card');
-navigators.forEach(navigator => {
-    navigator.addEventListener('click', function() {
-        for(const navigator of navigators) {
-            navigator.classList.remove('active');
-        }
-        navigator.classList.add('active');
-    });
-});
 
 const sidebars = document.querySelectorAll('.sidebar-link ul li');
 sidebars.forEach(sidebar => {
