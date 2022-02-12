@@ -1,4 +1,3 @@
-
 let xhr = new XMLHttpRequest();
 
 xhr.onreadystatechange = function() {
@@ -69,10 +68,10 @@ search.addEventListener('input', async function() {
 });
 
 function searchData(keyword) {
-    const small  = document.querySelector('.nav-input small');
-    const span   = document.querySelector('.nav-input small > span');
+    // const small  = document.querySelector('.nav-input small');
+    // const span   = document.querySelector('.nav-input small > span');
 
-    small.style.display = 'none';
+    // small.style.display = 'none';
 
     fetch('https://api.publicapis.org/entries')
         .then(response => response.json())
@@ -82,10 +81,10 @@ function searchData(keyword) {
             result.forEach(d  => card += cards(d));
             document.querySelector('.content-cards').innerHTML = card;
             
-            if(keyword.length > 0) {
-                small.style.display = 'block';
-                span.innerHTML = keyword;
-            }
+            // if(keyword.length > 0) {
+            //     small.style.display = 'block';
+            //     span.innerHTML = keyword;
+            // }
 
             document.querySelector('.content p > strong').innerHTML = result.length;
         });
@@ -114,17 +113,27 @@ function select(button) {
 const buttons = document.querySelectorAll('.sidebar-link ul li');
 buttons.forEach(button => {
     button.addEventListener('click', function() {
-        fetch('https://api.publicapis.org/entries')
-            .then(response => response.json())
-            .then(data => {
-                const categories    = data.entries.filter(d => d.Category.toLowerCase() === this.id);
-                let card            = '';
-                categories.forEach(category => card += cards(category));
-                document.querySelector('.content-cards').innerHTML      = card;
-                document.querySelector('.content p > strong').innerHTML = categories.length;
-            });
+        const id = this.id;
+        xhr.onreadystatechange = function() {
+            if(xhr.readyState == 4 && xhr.status == 200) {
+                let data = JSON.parse(this.responseText);
+                const entries = data.entries.filter(result => result.Category.toLowerCase() == id);
+                sidebar(entries);
+            }
+        }
+        xhr.open('GET', 'https://api.publicapis.org/entries', true);
+        xhr.send();
     });
 });
+
+
+function sidebar(data) {
+    let card            = '';
+    const categories    = data;
+    categories.forEach(category => card += cards(category));
+    document.querySelector('.content-cards').innerHTML      = card;
+    document.querySelector('.content p > strong').innerHTML = data.length;
+}
 
 function cards(result) {
     return `

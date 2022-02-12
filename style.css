@@ -267,6 +267,10 @@ nav svg {
     width: 100%;
   }
 
+  .content {
+    margin-right: 0;
+  }
+
   .content h1 {
     font-size: 1.2rem;
   }
@@ -278,6 +282,7 @@ nav svg {
   .content-navigator {
     display: grid;
     grid-template-columns: 1fr;
+    padding-right: 0;
   }
 
   .content-navigator .card {
