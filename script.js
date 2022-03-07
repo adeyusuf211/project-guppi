@@ -3,15 +3,16 @@ const api   = 'https://api.publicapis.org/entries';
 fetch(api)
     .then(response  => response.json())
     .then(data      => {
-        const entries   = data.entries;
+        const entries   = data.entries.slice(0, 100);
         allData(entries);
-    })
+    });
 
 function allData(data) {
     let card        = ``;
     data.forEach(d => card += cards(d));
     document.querySelector('.content-cards').innerHTML = card;
     
+    document.querySelector('.content h1').innerHTML         = 'Example Data';
     document.querySelector('.content p > strong').innerHTML = data.length;
 
     no(data);
