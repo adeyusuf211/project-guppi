@@ -1,23 +1,18 @@
-let xhr = new XMLHttpRequest();
+const api   = 'https://api.publicapis.org/entries';
 
-xhr.onreadystatechange = function() {
-    if(xhr.readyState == 4 && xhr.status == 200) {
-        let data        = JSON.parse(this.responseText);
+fetch(api)
+    .then(response  => response.json())
+    .then(data      => {
         const entries   = data.entries;
         allData(entries);
-    }
-}
-
-xhr.open('GET', 'https://api.publicapis.org/entries', true);
-xhr.send();
+    })
 
 function allData(data) {
     let card        = ``;
-    const entries   = data;
-    entries.forEach(e => card += cards(e));
+    data.forEach(d => card += cards(d));
     document.querySelector('.content-cards').innerHTML = card;
     
-    document.querySelector('.content p > strong').innerHTML = entries.length;
+    document.querySelector('.content p > strong').innerHTML = data.length;
 
     no(data);
     apiKey(data);
@@ -28,26 +23,21 @@ function allData(data) {
 const search = document.getElementById('search');
 
 search.addEventListener('input', async function() {
-   xhr.onreadystatechange = function() {
-    if(xhr.readyState == 4 && xhr.status == 200) {
-        let data        = JSON.parse(this.responseText);
-        const keyword   = search.value;
-        const result    = data.entries.filter(d => d.API.toLowerCase() === keyword.toLowerCase());
-        searchData(result);
-    }
-}
-
-xhr.open('GET', 'https://api.publicapis.org/entries', true);
-xhr.send();
+    fetch(api)
+        .then(response  => response.json())
+        .then(data      => {
+            const keyword   = search.value;
+            const result    = data.entries.filter(d => d.API.toLowerCase() === keyword.toLowerCase());
+            searchData(result);
+        });
 });
 
 function searchData(data) {
     let card         = ``;
-    const result     = data;
-    result.forEach(d  => card += cards(d));
+    data.forEach(d  => card += cards(d));
     document.querySelector('.content-cards').innerHTML = card;
 
-    document.querySelector('.content p > strong').innerHTML = result.length;
+    document.querySelector('.content p > strong').innerHTML = data.length;
     no(data);
     apiKey(data);
     OAuth(data);
@@ -56,24 +46,20 @@ function searchData(data) {
 const buttons = document.querySelectorAll('.sidebar-link ul li');
 buttons.forEach(button => {
     button.addEventListener('click', function() {
-        const id = this.id;
-        xhr.onreadystatechange = function() {
-            if(xhr.readyState == 4 && xhr.status == 200) {
-                let data        = JSON.parse(this.responseText);
+        const id        = this.id;
+        fetch(api)
+            .then(response  => response.json())
+            .then(data      => {
                 const entries   = data.entries.filter(result => result.Category.toLowerCase() == id);
                 sidebar(entries);
-            }
-        }
-        xhr.open('GET', 'https://api.publicapis.org/entries', true);
-        xhr.send();
+            });
     });
 });
 
 
 function sidebar(data) {
     let card            = '';
-    const categories    = data;
-    categories.forEach(category => card += cards(category));
+    data.forEach(category => card += cards(category));
     document.querySelector('.content-cards').innerHTML      = card;
     document.querySelector('.content p > strong').innerHTML = data.length;
 
