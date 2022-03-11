@@ -38,7 +38,9 @@ function searchData(data) {
     data.forEach(d  => card += cards(d));
     document.querySelector('.content-cards').innerHTML = card;
 
+    document.querySelector('.content h1').innerHTML         = 'Result';
     document.querySelector('.content p > strong').innerHTML = data.length;
+
     no(data);
     apiKey(data);
     OAuth(data);
@@ -62,6 +64,8 @@ function sidebar(data) {
     let card            = '';
     data.forEach(category => card += cards(category));
     document.querySelector('.content-cards').innerHTML      = card;
+
+    document.querySelector('.content h1').innerHTML         = "Result";
     document.querySelector('.content p > strong').innerHTML = data.length;
 
     no(data);
