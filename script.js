@@ -28,7 +28,7 @@ search.addEventListener('input', async function() {
         .then(response  => response.json())
         .then(data      => {
             const keyword   = search.value;
-            const result    = data.entries.filter(d => d.API.toLowerCase() === keyword.toLowerCase());
+            const result    = data.entries.filter(d => d.API.toLowerCase().includes(keyword.toLowerCase()));
             searchData(result);
         });
 });
