@@ -225,6 +225,18 @@ nav svg {
   margin-right: 10px;
 }
 
+.resource-author {
+  display: flex;
+  gap: 20px;
+}
+
+.resource-author a {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  transition: all 0.5s ease-in;
+}
+
 @media (max-width: 700px) {
   .sidebar.side {
     width: 100%;
@@ -291,5 +303,12 @@ nav svg {
 
   .content-navigator .card svg {
     width: 30px;
+  }
+  .resource-author a {
+    gap: 5px;
+  }
+
+  .resource-author a > span {
+    display: none;
   }
 }
