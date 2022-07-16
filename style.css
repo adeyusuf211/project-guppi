@@ -305,10 +305,14 @@ nav svg {
     width: 30px;
   }
   .resource-author a {
-    gap: 5px;
+    gap: 3px;
   }
 
   .resource-author a > span {
     display: none;
+  }
+
+  .nav-input input {
+    padding: 5px;
   }
 }
