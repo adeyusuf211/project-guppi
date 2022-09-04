@@ -116,6 +116,12 @@ nav svg {
   cursor: pointer;
 }
 
+nav .no-input {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+}
+
 .nav-input {
   display: flex;
   flex-direction: column;
@@ -314,5 +320,25 @@ nav svg {
 
   .nav-input input {
     padding: 5px;
+  }
+
+  nav {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  nav .nav-input {
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  nav .nav-input input {
+    width: 100%;
+    padding: 10px;
+  }
+
+  nav .no-input {
+    justify-content: space-between;
+    width: 100%;
   }
 }
